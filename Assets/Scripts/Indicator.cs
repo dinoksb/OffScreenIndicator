@@ -6,10 +6,12 @@ using UnityEngine.UI;
 /// </summary>
 public class Indicator : MonoBehaviour
 {
+    public float GetDistance { get => distance; }
+
     [SerializeField] private IndicatorType indicatorType;
     private Image indicatorImage;
     private Text distanceText;
-
+    private float distance;
     /// <summary>
     /// Gets if the game object is active in hierarchy.
     /// </summary>
@@ -53,6 +55,7 @@ public class Indicator : MonoBehaviour
     /// <param name="value"></param>
     public void SetDistanceText(float value)
     {
+        distance = value;
         distanceText.text = value >= 0 ? Mathf.Floor(value) + " m" : "";
     }
 
