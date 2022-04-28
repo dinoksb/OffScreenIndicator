@@ -3,32 +3,32 @@ using UnityEngine;
 
 class ArrowObjectPool : MonoBehaviour
 {
-    public static ArrowObjectPool current;
+    public static ArrowObjectPool Current;
 
     [Tooltip("Assign the arrow prefab.")]
-    public Indicator pooledObject;
+    public Indicator PooledObject;
     [Tooltip("Initial pooled amount.")]
-    public int pooledAmount = 1;
+    public int PooledAmount = 1;
     [Tooltip("Should the pooled amount increase.")]
-    public bool willGrow = true;
+    public bool WillGrow = true;
 
-    List<Indicator> pooledObjects;
+    private List<Indicator> _pooledObjects;
 
     void Awake()
     {
-        current = this;
+        Current = this;
     }
 
     void Start()
     {
-        pooledObjects = new List<Indicator>();
+        _pooledObjects = new List<Indicator>();
 
-        for (int i = 0; i < pooledAmount; i++)
+        for (int i = 0; i < PooledAmount; i++)
         {
-            Indicator arrow = Instantiate(pooledObject);
+            Indicator arrow = Instantiate(PooledObject);
             arrow.transform.SetParent(transform, false);
             arrow.Activate(false);
-            pooledObjects.Add(arrow);
+            _pooledObjects.Add(arrow);
         }
     }
 
@@ -38,19 +38,19 @@ class ArrowObjectPool : MonoBehaviour
     /// <returns></returns>
     public Indicator GetPooledObject()
     {
-        for (int i = 0; i < pooledObjects.Count; i++)
+        for (int i = 0; i < _pooledObjects.Count; i++)
         {
-            if (!pooledObjects[i].Active)
+            if (!_pooledObjects[i].Active)
             {
-                return pooledObjects[i];
+                return _pooledObjects[i];
             }
         }
-        if (willGrow)
+        if (WillGrow)
         {
-            Indicator arrow = Instantiate(pooledObject);
+            Indicator arrow = Instantiate(PooledObject);
             arrow.transform.SetParent(transform, false);
             arrow.Activate(false);
-            pooledObjects.Add(arrow);
+            _pooledObjects.Add(arrow);
             return arrow;
         }
         return null;
@@ -61,7 +61,7 @@ class ArrowObjectPool : MonoBehaviour
     /// </summary>
     public void DeactivateAllPooledObjects()
     {
-        foreach (Indicator arrow in pooledObjects)
+        foreach (Indicator arrow in _pooledObjects)
         {
             arrow.Activate(false);
         }

@@ -7,23 +7,23 @@
 public class Target : MonoBehaviour
 {
     [Tooltip("Change this color to change the indicators color for this target")]
-    [SerializeField] private Color targetColor = Color.red;
+    [SerializeField] private Color _targetColor = Color.red;
 
     [Tooltip("Select if box indicator is required for this target")]
-    [SerializeField] private bool needBoxIndicator = true;
+    [SerializeField] private bool _needBoxIndicator = true;
 
     [Tooltip("Select if arrow indicator is required for this target")]
-    [SerializeField] private bool needArrowIndicator = true;
+    [SerializeField] private bool _needArrowIndicator = true;
 
     [Tooltip("Select if distance text is required for this target")]
-    [SerializeField] private bool needDistanceText = true;
+    [SerializeField] private bool _needDistanceText = true;
 
     /// <summary>
     /// Please do not assign its value yourself without understanding its use.
     /// A reference to the target's indicator, 
     /// its value is assigned at runtime by the offscreen indicator script.
     /// </summary>
-    [HideInInspector] public Indicator indicator;
+    [HideInInspector] public Indicator Indicator;
 
     /// <summary>
     /// Gets the color for the target indicator.
@@ -32,7 +32,7 @@ public class Target : MonoBehaviour
     {
         get
         {
-            return targetColor;
+            return _targetColor;
         }
     }
 
@@ -43,7 +43,7 @@ public class Target : MonoBehaviour
     {
         get
         {
-            return needBoxIndicator;
+            return _needBoxIndicator;
         }
     }
 
@@ -54,7 +54,7 @@ public class Target : MonoBehaviour
     {
         get
         {
-            return needArrowIndicator;
+            return _needArrowIndicator;
         }
     }
 
@@ -65,7 +65,7 @@ public class Target : MonoBehaviour
     {
         get
         {
-            return needDistanceText;
+            return _needDistanceText;
         }
     }
 

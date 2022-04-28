@@ -1,7 +1,4 @@
 ﻿using PixelPlay.OffScreenIndicator;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 /// <summary>
@@ -13,7 +10,7 @@ public class OffScreenIndicator : OffScreenIndicatorBase
     protected override void LateUpdate()
     {
 #if UNITY_EDITOR
-        screenBounds = CalcScreenBound(screenBoundOffset);
+        _screenBounds = calcScreenBound(_screenBoundOffset);
 #endif
         base.LateUpdate();
     }
@@ -21,35 +18,35 @@ public class OffScreenIndicator : OffScreenIndicatorBase
     /// <summary>
     /// Draw the indicators on the screen and set thier position and rotation and other properties.
     /// </summary>
-    protected override void DrawIndicators()
+    protected override void drawIndicators()
     {
         foreach(Target target in targets)
         {
-            Vector3 screenPosition = OffScreenIndicatorCore.GetScreenPosition(targetCamera, target.transform.position);
+            Vector3 screenPosition = OffScreenIndicatorCore.GetScreenPosition(_targetCamera, target.transform.position);
 
-            if(targetCamera.orthographic)
+            if(_targetCamera.orthographic)
                 screenPosition = new Vector3(screenPosition.x, screenPosition.y, 0.01f);
 
             bool isTargetVisible = OffScreenIndicatorCore.IsTargetVisible(screenPosition);
-            float distanceFromCamera = target.NeedDistanceText ? target.GetDistanceFromCamera(targetCamera.transform.position) : float.MinValue;// Gets the target distance from the camera.
+            float distanceFromCamera = target.NeedDistanceText ? target.GetDistanceFromCamera(_targetCamera.transform.position) : float.MinValue;// Gets the target distance from the camera.
             Indicator indicator = null;
 
             if(target.NeedBoxIndicator && isTargetVisible)
             {
                 screenPosition.z = 0;
-                indicator = GetIndicator(ref target.indicator, IndicatorType.BOX); // Gets the box indicator from the pool.
+                indicator = getIndicator(ref target.Indicator, IndicatorType.BOX); // Gets the box indicator from the pool.
             }
             else if(target.NeedArrowIndicator && !isTargetVisible)
             {
                 float angle = float.MinValue;
-                OffScreenIndicatorCore.GetArrowIndicatorPositionAndAngle(ref screenPosition, ref angle, screenCentre, screenBounds);
-                indicator = GetIndicator(ref target.indicator, IndicatorType.ARROW); // Gets the arrow indicator from the pool.
+                OffScreenIndicatorCore.GetArrowIndicatorPositionAndAngle(ref screenPosition, ref angle, _screenCentre, _screenBounds);
+                indicator = getIndicator(ref target.Indicator, IndicatorType.ARROW); // Gets the arrow indicator from the pool.
                 indicator.transform.rotation = Quaternion.Euler(0, 0, angle * Mathf.Rad2Deg); // Sets the rotation for the arrow indicator.
             }
             else
             {
-                target.indicator?.Activate(false);
-                target.indicator = null;
+                target.Indicator?.Activate(false);
+                target.Indicator = null;
             }
             if(indicator)
             {
@@ -62,7 +59,7 @@ public class OffScreenIndicator : OffScreenIndicatorBase
     }
 
 
-    private Vector3 CalcScreenBound(float screenBoundOffset)
+    private Vector3 calcScreenBound(float screenBoundOffset)
     {
         var screenCentre = new Vector3(Screen.width, Screen.height, 0) / 2;
         var screenBounds = screenCentre * screenBoundOffset;

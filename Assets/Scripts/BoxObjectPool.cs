@@ -3,32 +3,32 @@ using UnityEngine;
 
 public class BoxObjectPool : MonoBehaviour
 {
-    public static BoxObjectPool current;
+    public static BoxObjectPool Current;
 
     [Tooltip("Assign the box prefab.")]
-    public Indicator pooledObject;
+    public Indicator PooledObject;
     [Tooltip("Initial pooled amount.")]
-    public int pooledAmount = 1;
+    public int PooledAmount = 1;
     [Tooltip("Should the pooled amount increase.")]
-    public bool willGrow = true;
+    public bool WillGrow = true;
 
-    List<Indicator> pooledObjects;
+    private List<Indicator> _pooledObjects;
 
     void Awake()
     {
-        current = this;
+        Current = this;
     }
 
     void Start()
     {
-        pooledObjects = new List<Indicator>();
+        _pooledObjects = new List<Indicator>();
 
-        for (int i = 0; i < pooledAmount; i++)
+        for (int i = 0; i < PooledAmount; i++)
         {
-            Indicator box = Instantiate(pooledObject);
+            Indicator box = Instantiate(PooledObject);
             box.transform.SetParent(transform, false);
             box.Activate(false);
-            pooledObjects.Add(box);
+            _pooledObjects.Add(box);
         }
     }
 
@@ -38,19 +38,19 @@ public class BoxObjectPool : MonoBehaviour
     /// <returns></returns>
     public Indicator GetPooledObject()
     {
-        for (int i = 0; i < pooledObjects.Count; i++)
+        for (int i = 0; i < _pooledObjects.Count; i++)
         {
-            if (!pooledObjects[i].Active)
+            if (!_pooledObjects[i].Active)
             {
-                return pooledObjects[i];
+                return _pooledObjects[i];
             }
         }
-        if (willGrow)
+        if (WillGrow)
         {
-            Indicator box = Instantiate(pooledObject);
+            Indicator box = Instantiate(PooledObject);
             box.transform.SetParent(transform, false);
             box.Activate(false);
-            pooledObjects.Add(box);
+            _pooledObjects.Add(box);
             return box;
         }
         return null;
@@ -61,7 +61,7 @@ public class BoxObjectPool : MonoBehaviour
     /// </summary>
     public void DeactivateAllPooledObjects()
     {
-        foreach (Indicator box in pooledObjects)
+        foreach (Indicator box in _pooledObjects)
         {
             box.Activate(false);
         }

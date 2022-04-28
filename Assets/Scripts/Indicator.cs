@@ -6,12 +6,12 @@ using UnityEngine.UI;
 /// </summary>
 public class Indicator : MonoBehaviour
 {
-    public float GetDistance { get => distance; }
+    public float GetDistance { get => _distance; }
 
-    [SerializeField] private IndicatorType indicatorType;
-    private Image indicatorImage;
-    private Text distanceText;
-    private float distance;
+    [SerializeField] private IndicatorType _indicatorType;
+    private Image _indicatorImage;
+    private Text _distanceText;
+    private float _distance;
     /// <summary>
     /// Gets if the game object is active in hierarchy.
     /// </summary>
@@ -30,14 +30,14 @@ public class Indicator : MonoBehaviour
     {
         get
         {
-            return indicatorType;
+            return _indicatorType;
         }
     }
 
     void Awake()
     {
-        indicatorImage = transform.GetComponent<Image>();
-        distanceText = transform.GetComponentInChildren<Text>();
+        _indicatorImage = transform.GetComponent<Image>();
+        _distanceText = transform.GetComponentInChildren<Text>();
     }
 
     /// <summary>
@@ -46,7 +46,7 @@ public class Indicator : MonoBehaviour
     /// <param name="color"></param>
     public void SetImageColor(Color color)
     {
-        indicatorImage.color = color;
+        _indicatorImage.color = color;
     }
 
     /// <summary>
@@ -55,8 +55,8 @@ public class Indicator : MonoBehaviour
     /// <param name="value"></param>
     public void SetDistanceText(float value)
     {
-        distance = value;
-        distanceText.text = value >= 0 ? Mathf.Floor(value) + " m" : "";
+        _distance = value;
+        _distanceText.text = value >= 0 ? Mathf.Floor(value) + " m" : "";
     }
 
     /// <summary>
@@ -65,7 +65,7 @@ public class Indicator : MonoBehaviour
     /// <param name="rotation"></param>
     public void SetTextRotation(Quaternion rotation)
     {
-        distanceText.rectTransform.rotation = rotation;
+        _distanceText.rectTransform.rotation = rotation;
     }
 
     /// <summary>

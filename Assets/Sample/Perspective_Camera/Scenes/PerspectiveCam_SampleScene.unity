@@ -154,11 +154,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5dd462da48ed9b49a885f1a9cf94fe1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetColor: {r: 0.9209432, g: 0.9338235, b: 0, a: 0.959}
-  needBoxIndicator: 1
-  needArrowIndicator: 1
-  needDistanceText: 1
-  indicator: {fileID: 0}
+  _targetColor: {r: 1, g: 0, b: 0, a: 1}
+  _needBoxIndicator: 1
+  _needArrowIndicator: 1
+  _needDistanceText: 1
+  Indicator: {fileID: 0}
 --- !u!23 &539593968
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -534,11 +534,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05d28b3ab3013af48bf4d8a18542812c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraSensitivity: 90
-  climbSpeed: 4
-  normalMoveSpeed: 10
-  slowMoveFactor: 0.25
-  fastMoveFactor: 3
+  CameraSensitivity: 90
+  ClimbSpeed: 4
+  NormalMoveSpeed: 10
+  SlowMoveFactor: 0.25
+  FastMoveFactor: 3
 --- !u!1 &1391303162
 GameObject:
   m_ObjectHideFlags: 0
@@ -672,8 +672,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff511462938e26c499636c590ec5ec2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  screenBoundOffset: 0.9
-  targetCamera: {fileID: 1099495715}
+  _screenBoundOffset: 0.9
+  _targetCamera: {fileID: 1099495715}
 --- !u!114 &1560628076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -724,9 +724,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d284f5b4b17657040aa75be0ffd9c9bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pooledObject: {fileID: 11433564, guid: 4ba917782e0c8ad408e168cb9bf4af87, type: 3}
-  pooledAmount: 1
-  willGrow: 1
+  PooledObject: {fileID: 11433564, guid: 4ba917782e0c8ad408e168cb9bf4af87, type: 3}
+  PooledAmount: 10
+  WillGrow: 1
 --- !u!114 &1560628079
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -739,9 +739,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce42bcb2b35e3024cba7695dac1e3114, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pooledObject: {fileID: 11434930, guid: 759f4cf7d9905754ea923bde1c9b613d, type: 3}
-  pooledAmount: 1
-  willGrow: 1
+  PooledObject: {fileID: 11434930, guid: 759f4cf7d9905754ea923bde1c9b613d, type: 3}
+  PooledAmount: 1
+  WillGrow: 1
 --- !u!1 &1670982522
 GameObject:
   m_ObjectHideFlags: 0
@@ -866,11 +866,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5dd462da48ed9b49a885f1a9cf94fe1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetColor: {r: 0.13475396, g: 0.10542819, b: 0.9558824, a: 1}
-  needBoxIndicator: 1
-  needArrowIndicator: 1
-  needDistanceText: 1
-  indicator: {fileID: 0}
+  _targetColor: {r: 1, g: 0, b: 0, a: 1}
+  _needBoxIndicator: 1
+  _needArrowIndicator: 1
+  _needDistanceText: 1
+  Indicator: {fileID: 0}
 --- !u!23 &1769770278
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1041,11 +1041,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5dd462da48ed9b49a885f1a9cf94fe1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetColor: {r: 1, g: 0.07352942, b: 0.07352942, a: 1}
-  needBoxIndicator: 1
-  needArrowIndicator: 1
-  needDistanceText: 1
-  indicator: {fileID: 0}
+  _targetColor: {r: 1, g: 0, b: 0, a: 1}
+  _needBoxIndicator: 1
+  _needArrowIndicator: 1
+  _needDistanceText: 1
+  Indicator: {fileID: 0}
 --- !u!23 &1950926462
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1140,11 +1140,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5dd462da48ed9b49a885f1a9cf94fe1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetColor: {r: 0.12635165, g: 0.9044118, b: 0.19610858, a: 1}
-  needBoxIndicator: 1
-  needArrowIndicator: 1
-  needDistanceText: 1
-  indicator: {fileID: 0}
+  _targetColor: {r: 1, g: 0, b: 0, a: 1}
+  _needBoxIndicator: 1
+  _needArrowIndicator: 1
+  _needDistanceText: 1
+  Indicator: {fileID: 0}
 --- !u!23 &2089249790
 MeshRenderer:
   m_ObjectHideFlags: 0

@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,48 +7,48 @@ public abstract class OffScreenIndicatorBase : MonoBehaviour
 {
     public static Action<Target, bool> TargetStateChanged;
 
-    public bool DisplayHelper { get => displayHelper; set => displayHelper = value; }
-    public float ScreenBoundOffset { get => screenBoundOffset; set => screenBoundOffset = value; }
-    public Camera TargetCamera { get => targetCamera; set => targetCamera = value; }
+    public bool DisplayHelper { get => _displayHelper; set => _displayHelper = value; }
+    public float ScreenBoundOffset { get => _screenBoundOffset; set => _screenBoundOffset = value; }
+    public Camera TargetCamera { get => _targetCamera; set => _targetCamera = value; }
 
     [Range(0.5f, 0.9f)]
     [Tooltip("Distance offset of the indicators from the centre of the screen")]
-    [SerializeField] protected float screenBoundOffset = 0.9f;
-    [SerializeField] protected Camera targetCamera;
+    [SerializeField] protected float _screenBoundOffset = 0.9f;
+    [SerializeField] protected Camera _targetCamera;
 
     protected List<Target> targets = new List<Target>();
 
-    protected Vector3 screenCentre;
-    protected Vector3 screenBounds;
+    protected Vector3 _screenCentre;
+    protected Vector3 _screenBounds;
 
-    private bool displayHelper;
-    private Color originGizmoColor;
-    private Color helperColor;
+    private bool _displayHelper;
+    private Color _originGizmoColor;
+    private Color _helperColor;
 
     private void Awake()
     {
-        screenCentre = new Vector3(Screen.width, Screen.height, 0) / 2;
-        screenBounds = screenCentre * screenBoundOffset;
-        TargetStateChanged += HandleTargetStateChanged;
-        originGizmoColor = Gizmos.color;
-        helperColor = new Color(1, 1, 1, 0.3f);
+        _screenCentre = new Vector3(Screen.width, Screen.height, 0) / 2;
+        _screenBounds = _screenCentre * _screenBoundOffset;
+        TargetStateChanged += handleTargetStateChanged;
+        _originGizmoColor = Gizmos.color;
+        _helperColor = new Color(1, 1, 1, 0.3f);
     }
 
     protected virtual void LateUpdate()
     {
-        screenBounds = screenCentre * screenBoundOffset;
-        DrawIndicators();
+        _screenBounds = _screenCentre * _screenBoundOffset;
+        drawIndicators();
     }
 
     private void OnDestroy()
     {
-        TargetStateChanged -= HandleTargetStateChanged;
+        TargetStateChanged -= handleTargetStateChanged;
     }
 
     /// <summary>
     /// Draw the indicators on the screen and set thier position and rotation and other properties.
     /// </summary>
-    protected abstract void DrawIndicators();
+    protected abstract void drawIndicators();
 
     /// <summary>
     /// Get the indicator for the target.
@@ -63,20 +62,20 @@ public abstract class OffScreenIndicatorBase : MonoBehaviour
     /// <param name="indicator"></param>
     /// <param name="type"></param>
     /// <returns></returns>
-    protected virtual Indicator GetIndicator(ref Indicator indicator, IndicatorType type)
+    protected virtual Indicator getIndicator(ref Indicator indicator, IndicatorType type)
     {
         if (indicator != null)
         {
             if (indicator.Type != type)
             {
                 indicator.Activate(false);
-                indicator = type == IndicatorType.BOX ? BoxObjectPool.current.GetPooledObject() : ArrowObjectPool.current.GetPooledObject();
+                indicator = type == IndicatorType.BOX ? BoxObjectPool.Current.GetPooledObject() : ArrowObjectPool.Current.GetPooledObject();
                 indicator.Activate(true); // Sets the indicator as active.
             }
         }
         else
         {
-            indicator = type == IndicatorType.BOX ? BoxObjectPool.current.GetPooledObject() : ArrowObjectPool.current.GetPooledObject();
+            indicator = type == IndicatorType.BOX ? BoxObjectPool.Current.GetPooledObject() : ArrowObjectPool.Current.GetPooledObject();
             indicator.Activate(true); // Sets the indicator as active.
         }
         return indicator;
@@ -89,7 +88,7 @@ public abstract class OffScreenIndicatorBase : MonoBehaviour
     /// </summary>
     /// <param name="target"></param>
     /// <param name="active"></param>
-    protected virtual void HandleTargetStateChanged(Target target, bool active)
+    protected virtual void handleTargetStateChanged(Target target, bool active)
     {
         if (active)
         {
@@ -97,19 +96,19 @@ public abstract class OffScreenIndicatorBase : MonoBehaviour
         }
         else
         {
-            target.indicator?.Activate(false);
-            target.indicator = null;
+            target.Indicator?.Activate(false);
+            target.Indicator = null;
             targets.Remove(target);
         }
     }
 
     private void OnDrawGizmos()
     {
-        if(displayHelper)
+        if(_displayHelper)
         {
-            Gizmos.color = helperColor;
-            Gizmos.DrawCube(screenCentre, screenBounds * 2);
-            Gizmos.color = originGizmoColor;
+            Gizmos.color = _helperColor;
+            Gizmos.DrawCube(_screenCentre, _screenBounds * 2);
+            Gizmos.color = _originGizmoColor;
         }
     }
 }
