@@ -24,6 +24,7 @@ public abstract class OffScreenIndicatorBase : MonoBehaviour
 
     private bool displayHelper;
     private Color originGizmoColor;
+    private Color helperColor;
 
     private void Awake()
     {
@@ -31,6 +32,7 @@ public abstract class OffScreenIndicatorBase : MonoBehaviour
         screenBounds = screenCentre * screenBoundOffset;
         TargetStateChanged += HandleTargetStateChanged;
         originGizmoColor = Gizmos.color;
+        helperColor = new Color(1, 1, 1, 0.3f);
     }
 
     protected virtual void LateUpdate()
@@ -105,8 +107,8 @@ public abstract class OffScreenIndicatorBase : MonoBehaviour
     {
         if(displayHelper)
         {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireCube(screenCentre, screenBounds * 2);
+            Gizmos.color = helperColor;
+            Gizmos.DrawCube(screenCentre, screenBounds * 2);
             Gizmos.color = originGizmoColor;
         }
     }
