@@ -1,17 +1,7 @@
 ﻿using UnityEngine;
 
-public class ExtendedFlycam : MonoBehaviour
+public class CameraMovement : MonoBehaviour
 {
-    /*
-        FEATURES
-            WASD/Arrows:    Movement
-                      Q:    Climb
-                      E:    Drop
-                          Shift:    Move faster
-                        Control:    Move slower
-                            End:    Toggle cursor locking to screen (you can also press Ctrl+P to toggle play mode on and off).
-        */
-
     public float CameraSensitivity = 90;
     public float ClimbSpeed = 4;
     public float NormalMoveSpeed = 10;
