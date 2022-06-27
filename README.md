@@ -1,5 +1,4 @@
 # OffScreenIndicator
-unity offscreen indicator
 
 OffScreenIndicator 는 단일 또는 다수의 타겟을 설정하여 화면 안이나 밖에서 GUI로 위치를 나타내 파악 할 수 있도록 해주는 기능 입니다.
 
