@@ -41,7 +41,8 @@ public class OffScreenIndicator : OffScreenIndicatorBase
                 float angle = float.MinValue;
                 OffScreenIndicatorCore.GetArrowIndicatorPositionAndAngle(ref screenPosition, ref angle, _screenCentre, _screenBounds);
                 indicator = getIndicator(ref target.Indicator, IndicatorType.ARROW); // Gets the arrow indicator from the pool.
-                indicator.transform.rotation = Quaternion.Euler(0, 0, angle * Mathf.Rad2Deg); // Sets the rotation for the arrow indicator.
+                if(indicator != null)
+                    indicator.transform.rotation = Quaternion.Euler(0, 0, angle * Mathf.Rad2Deg); // Sets the rotation for the arrow indicator.
             }
             else
             {
